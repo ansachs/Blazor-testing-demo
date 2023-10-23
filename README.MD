@@ -1,17 +1,23 @@
 ## setup 
-#### all projects target dotnet 7
+#### Instructions for running
+* install dotnet 7
+* clone project
+* open project and run dotnet restore, make sure no errors
+* to run Server
+  * ```cd Server; dotnet run```
+* to run Tests
+  * run from IDE
+  * run from terminal: ```dotnet test```
 
+#### How this project was built
 ```
 dotnet new blazorwasm --hosted -o DemoTesting (will create a client served by a server in one)
 
 dotnet new xunit -o ClientTest
- dotnet sln add ClientTest
- 
-dotnet cd Client
-dotnet add package restsharp
-cd ..
+dotnet new xunit -o ServerTest 
+dotnet sln add ClientTest ServerTest
 
-dotnet cd ClientTest
+cd ClientTest
 dotnet add package moq
 dotnet add package Newtonsoft.Json
 dotnet add package bunit
@@ -19,12 +25,29 @@ dotnet add package FluentAssertions
 dotnet add package WireMock.Net
 cd ..
 
-dotnet new xunit -o ClientTest
-dotnet new nunit -o ServerTest (trying out different test lib)
-dotnet sln add ClientTest ServerTest
+cd Server
+dotnet add package Microsoft.AspNetCore.Mvc.Testing
+cd ..
 
-(right click on ClientTest/ServerTest and reference to the project being tested)
+(right click on ClientTest/ServerTest and add reference to the project being tested)
 ```
+## Testing libraries
+#### moq - https://github.com/devlooped/moq
+* used to create proxy around interfaces and classes inorder to assign our own behavior
+
+#### Newtonsoft.Json
+* json parsing library, use here for converting object to json
+
+#### bunit - https://bunit.dev/
+* testing utilities for razor/blazor pages, allowing us to render in a virtual dom and assert on the html.
+
+#### FluentAssertions
+* ability to write inline assertions, ie taking any value and adding ```.Should()``` 
+* optional, consider using this if people like it
+
+#### WireMock.net
+* create a mock local server and mock out api response
+
 ## Testing conventions
 * separate projects for testing
   * code separation, easier to run based on comments
@@ -76,6 +99,20 @@ private void CreateWeatherInfoStub()
                     .WithHeader("Content-Type", "text/plain")
                     .WithBody(JsonConvert.SerializeObject(weatherForecast))
             );
+    }
+```
+
+* to test the controller layer, use the dotnet WebApplicationFactory to create an integration test HttpClient. Needs to reference the program.cs in the
+project under test
+```
+public class WeatherForecastControllerTest: IClassFixture<WebApplicationFactory<Program>>
+{
+    
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public WeatherForecastControllerTest(WebApplicationFactory<Program> factory)
+    {
+        _factory = factory;
     }
 ```
 

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace ServerTest.Controllers;
 
-public class WeatherForecastControllerTest: IClassFixture<WebApplicationFactory<Program>>
+public class WeatherForecastControllerTest: IClassFixture<WebApplicationFactory<Program>> //setting as a fixture should mean the same factory is shared by all tests in case you want something setup one time in xunit
 {
     
     private readonly WebApplicationFactory<Program> _factory;

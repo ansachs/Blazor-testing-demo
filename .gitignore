@@ -238,7 +238,7 @@ FakesAssemblies/
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
 **/*.DesktopClient/ModelManifest.xml
-**/*.Server/GeneratedArtifacts
+**/*.Server/GeneratedArtifact
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 

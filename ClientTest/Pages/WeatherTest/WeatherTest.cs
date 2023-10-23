@@ -20,7 +20,7 @@ public class WeatherTest: TestContext
 
     public WeatherTest(ITestOutputHelper testOutputHelper)
     {
-        _testOutputHelper = testOutputHelper;
+        _testOutputHelper = testOutputHelper; //useful tool from test framework to help log rendered dom
     }
     
     /*
