@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client\DemoTesting.Client.csproj" />
+    <ProjectReference Include="..\Shared\DemoTesting.Shared.csproj" />
+  </ItemGroup>
+
+<!--  <ItemGroup>-->
+<!--    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">-->
+<!--      <_Parameter1>ServerTest</_Parameter1> &lt;!&ndash; The name of the project that you want the Internal class to be visible To it &ndash;&gt;-->
+<!--    </AssemblyAttribute>-->
+<!--  </ItemGroup>-->
+
+
+</Project>
